@@ -1,49 +1,66 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
+import {
+  Container,
+  Form,
+  Title,
+  Label,
+  Input,
+  ErrorMessage,
+  ForgotLink,
+  SignupLink,
+  SocialButton,
+  SocialBox,
+  Divider,
+  DividerBox,
+  SaveId,
+  LoginButton,
+} from "./LoginPage.style";
 
 function LoginPage() {
-  const [loginId, setLoginId] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginId, setLoginId] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [loginError, setLoginError] = useState('');
+  const [loginError, setLoginError] = useState("");
 
-  const onLoginIdChange = (e) => {
-    setLoginId(e.target.value);
-  };
+  const saveIdRef = useRef(null);
+  const navigate = useNavigate();
 
-  const onPasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const onLoginIdChange = (e) => setLoginId(e.target.value);
+  const onPasswordChange = (e) => setPassword(e.target.value);
 
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault(); 
-
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
     setIsLoggingIn(true);
-    setLoginError(''); 
+    setLoginError("");
 
-    
-    // if (loginId === 'test@example.com' && password === 'password123') {
-    //   setLoginError('');
-     
-    //   history.push('/dashboard');
-    // } else {
-    //   setLoginError('아이디 또는 비밀번호가 틀렸습니다.');
-    // }
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (
+      storedData &&
+      storedData.email === loginId &&
+      storedData.password === password
+    ) {
+      navigate("/landing-page");
+      if (saveIdRef.current.checked) {
+        localStorage.setItem("savedId", loginId);
+      } else {
+        localStorage.removeItem("savedId");
+      }
+    } else {
+      setLoginError("아이디 또는 비밀번호가 올바르지 않습니다.");
+    }
 
-    // setIsLoggingIn(false); // 로그인 종료
+    setIsLoggingIn(false);
   };
 
   return (
-    <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center',
-      width: '100%', height: '100vh'
-    }}>
-      <form style={{ display: 'flex', flexDirection: 'column', width: '300px' }} 
-      onSubmit={handleLoginSubmit}>
-        <h1>로그인</h1>
-        
-        <label>아이디</label>
-        <input
+    <Container>
+      <Form onSubmit={handleLoginSubmit}>
+        <Title>로그인</Title>
+
+        <Label>아이디</Label>
+        <Input
           type="text"
           value={loginId}
           onChange={onLoginIdChange}
@@ -51,8 +68,8 @@ function LoginPage() {
           required
         />
 
-        <label>비밀번호</label>
-        <input
+        <Label>비밀번호</Label>
+        <Input
           type="password"
           value={password}
           onChange={onPasswordChange}
@@ -60,18 +77,46 @@ function LoginPage() {
           required
         />
 
-        <button type="submit" disabled={isLoggingIn}>
-          {isLoggingIn ? '로그인 중...' : '로그인'}
-        </button>
+        <SaveId>
+          <label>
+            <input type="checkbox" ref={saveIdRef} />
+            아이디 저장
+          </label>
+        </SaveId>
 
-        {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+        <LoginButton type="submit" disabled={isLoggingIn}>
+          {isLoggingIn ? "로그인 중..." : "로그인"}
+        </LoginButton>
 
-        <div style={{ marginTop: '10px' }}>
-          <p>아직 계정이 없으신가요? 
-          <Link to="/signup">회원가입</Link></p>
-        </div>
-      </form>
-    </div>
+        {loginError && <ErrorMessage>{loginError}</ErrorMessage>}
+
+        <ForgotLink>
+          <Link to="/forgot-id-password">아이디/비밀번호 찾기</Link>
+        </ForgotLink>
+
+        <DividerBox>
+          <Divider />
+          <span>또는</span>
+          <Divider />
+        </DividerBox>
+
+        <SocialBox>
+          <SocialButton>
+            <FaGoogle className="google" />
+          </SocialButton>
+          <SocialButton>
+            <FaFacebookF className="facebook" />
+          </SocialButton>
+          <SocialButton>
+            <FaApple className="apple" />
+          </SocialButton>
+        </SocialBox>
+
+        <SignupLink>
+          아직 계정이 없으신가요? <Link to="/registration-page">회원가입</Link>
+        </SignupLink>
+      </Form>
+    </Container>
   );
 }
 
