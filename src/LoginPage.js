@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
 import {
@@ -27,31 +27,44 @@ function LoginPage() {
   const saveIdRef = useRef(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const savedId = localStorage.getItem("savedId");
+    if (savedId) setLoginId(savedId);
+  }, []);
+
   const onLoginIdChange = (e) => setLoginId(e.target.value);
   const onPasswordChange = (e) => setPassword(e.target.value);
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault(); // 기본 새로고침 방지
     setIsLoggingIn(true);
     setLoginError("");
 
-    const storedData = JSON.parse(localStorage.getItem("userData"));
-    if (
-      storedData &&
-      storedData.email === loginId &&
-      storedData.password === password
-    ) {
-      navigate("/landing-page");
-      if (saveIdRef.current.checked) {
-        localStorage.setItem("savedId", loginId);
-      } else {
-        localStorage.removeItem("savedId");
-      }
-    } else {
-      setLoginError("아이디 또는 비밀번호가 올바르지 않습니다.");
-    }
+    try {
+      const res = await fetch(
+        `http://localhost:9000/login?username=${encodeURIComponent(
+          loginId
+        )}&password=${encodeURIComponent(password)}`
+      );
+      const data = await res.json();
 
-    setIsLoggingIn(false);
+      if (!res.ok) {
+        setLoginError(data.error || "로그인 실패");
+      } else {
+        if (saveIdRef.current?.checked) {
+          localStorage.setItem("savedId", loginId);
+        } else {
+          localStorage.removeItem("savedId");
+        }
+
+        localStorage.setItem("userData", JSON.stringify(data.user));
+        navigate("/landing-page");
+      }
+    } catch (error) {
+      setLoginError("서버 오류가 발생했습니다.");
+    } finally {
+      setIsLoggingIn(false);
+    }
   };
 
   return (
@@ -59,12 +72,12 @@ function LoginPage() {
       <Form onSubmit={handleLoginSubmit}>
         <Title>로그인</Title>
 
-        <Label>아이디</Label>
+        <Label>아이디 또는 이메일</Label>
         <Input
           type="text"
           value={loginId}
           onChange={onLoginIdChange}
-          placeholder="아이디를 입력해 주세요"
+          placeholder="아이디 또는 이메일을 입력하세요"
           required
         />
 
@@ -73,7 +86,7 @@ function LoginPage() {
           type="password"
           value={password}
           onChange={onPasswordChange}
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder="비밀번호를 입력하세요"
           required
         />
 

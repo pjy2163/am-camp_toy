@@ -97,3 +97,10 @@ export const SignupLink = styled.div`
     }
   }
 `;
+export const SuccessMessage = styled.p`
+  font-size: 13px;
+  color: #16a34a;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 10px;
+`;
