@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
+import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
 import {
   Container,
   Form,
@@ -118,10 +118,7 @@ function LoginPage() {
             <FaGoogle className="google" />
           </SocialButton>
           <SocialButton>
-            <FaFacebookF className="facebook" />
-          </SocialButton>
-          <SocialButton>
-            <FaApple className="apple" />
+            <FaGithub className="gitgub" />
           </SocialButton>
         </SocialBox>
 

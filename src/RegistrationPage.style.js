@@ -42,7 +42,7 @@ export const Input = styled.input`
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 100%;
+  width: 94%;
   margin-bottom: 20px;
   transition: border-color 0.3s ease;
 

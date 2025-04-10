@@ -42,7 +42,7 @@ export const Input = styled.input`
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 100%;
+  width: 90%;
   margin-bottom: 20px;
   transition: border-color 0.3s ease;
 
@@ -53,7 +53,7 @@ export const Input = styled.input`
 `;
 
 export const SaveId = styled.div`
-  font-size: 14px;
+  font-size: 13px;
   margin-top: -10px;
   margin-bottom: 15px;
 
@@ -73,7 +73,7 @@ export const LoginButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   margin-bottom: 10px;
-  width: 100%;
+  width: 97%;
   transition: background-color 0.3s ease;
 
   &:disabled {
@@ -137,11 +137,7 @@ export const SocialBox = styled.div`
     color: #db4437;
   }
 
-  .facebook {
-    color: #4267b2;
-  }
-
-  .apple {
+  .gitbub {
     color: #333;
   }
 `;
@@ -152,7 +148,7 @@ export const SocialButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   background-color: white;
-  font-size: 20px;
+  font-size: 30px;
 `;
 
 export const SignupLink = styled.div`
