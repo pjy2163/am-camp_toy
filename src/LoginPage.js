@@ -1,3 +1,4 @@
+// LoginPage.js
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
@@ -36,7 +37,7 @@ function LoginPage() {
   const onPasswordChange = (e) => setPassword(e.target.value);
 
   const handleLoginSubmit = async (e) => {
-    e.preventDefault(); // 기본 새로고침 방지
+    e.preventDefault();
     setIsLoggingIn(true);
     setLoginError("");
 
@@ -65,6 +66,13 @@ function LoginPage() {
     } finally {
       setIsLoggingIn(false);
     }
+  };
+
+  const GithubLogin = () => {
+    const clientId = "Ov23lilEFmixYGI69GW6";
+    const redirectUrl = "http://localhost:3000/callback";
+    const githubURL = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}`;
+    window.location.href = githubURL;
   };
 
   return (
@@ -117,8 +125,8 @@ function LoginPage() {
           <SocialButton>
             <FaGoogle className="google" />
           </SocialButton>
-          <SocialButton>
-            <FaGithub className="gitgub" />
+          <SocialButton onClick={GithubLogin}>
+            <FaGithub className="github" />
           </SocialButton>
         </SocialBox>
 

@@ -137,7 +137,7 @@ export const SocialBox = styled.div`
     color: #db4437;
   }
 
-  .gitbub {
+  .github {
     color: #333;
   }
 `;
