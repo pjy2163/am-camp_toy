@@ -19,8 +19,14 @@ function GithubCallback() {
         .then((data) => {
           if (data.success) {
             // 사용자 정보 저장 등 처리
+            const userData = {
+              ...data.user,
+              loginType: "github",
+            };
             localStorage.setItem("userData", JSON.stringify(data.user));
-            navigate("/landing-page");
+            navigate("/landing-page", {
+              state: { nickname: userData.nickname },
+            });
           } else {
             alert("GitHub 로그인 실패");
             navigate("/login");

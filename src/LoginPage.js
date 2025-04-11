@@ -59,7 +59,7 @@ function LoginPage() {
         }
 
         localStorage.setItem("userData", JSON.stringify(data.user));
-        navigate("/landing-page");
+        navigate("/landing-page", { state: { nickname: data.nickname } });
       }
     } catch (error) {
       setLoginError("서버 오류가 발생했습니다.");
