@@ -1,7 +1,7 @@
-// LoginPage.js
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
+import { FaGoogle, FaGithub } from "react-icons/fa";
+
 import {
   Container,
   Form,
@@ -75,6 +75,17 @@ function LoginPage() {
     window.location.href = githubURL;
   };
 
+  const GoogleLogin = () => {
+    const clientId =
+      "415064006146-1k0mkvf70roktkg3ch96r4tl0bfrgu2l.apps.googleusercontent.com";
+    const redirectUri = "http://localhost:3000/google-callback";
+    const scope = "email profile";
+    const responseType = "code";
+    const googleURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
+
+    window.location.href = googleURL;
+  };
+
   return (
     <Container>
       <Form onSubmit={handleLoginSubmit}>
@@ -122,7 +133,7 @@ function LoginPage() {
         </DividerBox>
 
         <SocialBox>
-          <SocialButton>
+          <SocialButton onClick={GoogleLogin}>
             <FaGoogle className="google" />
           </SocialButton>
           <SocialButton onClick={GithubLogin}>

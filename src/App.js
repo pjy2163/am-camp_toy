@@ -9,6 +9,7 @@ import LoginPage from "./LoginPage";
 import RegistrationPage from "./RegistrationPage";
 import LandingPage from "./LandingPage";
 import GithubCallback from "./GithubCallback";
+import GoogleCallback from "./GoogleCallback";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/registration-page" element={<RegistrationPage />} />
         <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/callback" element={<GithubCallback />} />
+        <Route path="/google-callback" element={<GoogleCallback />} />
       </Routes>
     </Router>
   );
