@@ -24,6 +24,17 @@ export const TopBar = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
+export const Logo = styled.div`
+  font-weight: bold;
+  font-size: 18px;
+`;
+
+export const PageContent = styled.div`
+  padding-top: 60px;
+  flex-grow: 1;
+  display: flex;
+`;
+
 // 로그아웃 버튼
 export const LogoutButton = styled.button`
   background-color: transparent;

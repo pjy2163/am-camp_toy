@@ -30,18 +30,17 @@ function LandingPage() {
   return (
     <Container>
       <TopBar>
-        <div style={{ fontWeight: "bold", fontSize: "18px" }}>toy-board</div>
+        <logo>toy-board</logo>
         <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
       </TopBar>
 
-      {/* 상단바 높이만큼 패딩 주기 */}
-      <div style={{ paddingTop: "40px", flexGrow: 1, display: "flex" }}>
+      <PageContent>
         <Message>
           환영합니다!
           <br />
           {nickname}님
         </Message>
-      </div>
+      </PageContent>
     </Container>
   );
 }
