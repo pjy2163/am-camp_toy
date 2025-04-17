@@ -10,6 +10,7 @@ import RegistrationPage from "./RegistrationPage";
 import LandingPage from "./LandingPage";
 import GithubCallback from "./GithubCallback";
 import GoogleCallback from "./GoogleCallback";
+import BoardPage from "./pages/BoardPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/landing-page" element={<LandingPage />} />
       <Route path="/callback" element={<GithubCallback />} />
       <Route path="/google-callback" element={<GoogleCallback />} />
+      <Route path="/board/:category" element={<BoardPage />} />
     </Routes>
     // </Router>
   );

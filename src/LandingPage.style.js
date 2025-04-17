@@ -33,6 +33,9 @@ export const PageContent = styled.div`
   padding-top: 60px;
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 // 로그아웃 버튼
@@ -60,5 +63,19 @@ export const Message = styled.h1`
 
   @media (max-width: 480px) {
     font-size: 24px;
+  }
+`;
+//카테고리 버튼
+export const CategoryButton = styled.button`
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #ddd;
   }
 `;
