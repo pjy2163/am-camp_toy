@@ -30,9 +30,11 @@ function GoogleCallback() {
           navigate("/landing-page", { state: { nickname: data.nickname } });
         } else {
           console.error("로그인 실패");
+          navigate("/login-page");
         }
       } catch (err) {
         console.error("에러 발생", err);
+        navigate("/login-page");
       }
     };
 

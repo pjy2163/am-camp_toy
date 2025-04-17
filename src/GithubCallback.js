@@ -29,12 +29,12 @@ function GithubCallback() {
             });
           } else {
             alert("GitHub 로그인 실패");
-            navigate("/login");
+            navigate("/login-page");
           }
         })
         .catch((err) => {
           console.error(err);
-          navigate("/login");
+          navigate("/login-page");
         });
     }
   }, [navigate]);

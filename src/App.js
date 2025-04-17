@@ -13,16 +13,16 @@ import GoogleCallback from "./GoogleCallback";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login-page" replace />} />
-        <Route path="/login-page" element={<LoginPage />} />
-        <Route path="/registration-page" element={<RegistrationPage />} />
-        <Route path="/landing-page" element={<LandingPage />} />
-        <Route path="/callback" element={<GithubCallback />} />
-        <Route path="/google-callback" element={<GoogleCallback />} />
-      </Routes>
-    </Router>
+    // <Router>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login-page" replace />} />
+      <Route path="/login-page" element={<LoginPage />} />
+      <Route path="/registration-page" element={<RegistrationPage />} />
+      <Route path="/landing-page" element={<LandingPage />} />
+      <Route path="/callback" element={<GithubCallback />} />
+      <Route path="/google-callback" element={<GoogleCallback />} />
+    </Routes>
+    // </Router>
   );
 }
 
