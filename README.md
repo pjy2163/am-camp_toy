@@ -10,7 +10,7 @@
 
 
 tool : vscode, mariaDB
-구현 기능 : 
+
 
 1. 로그인 / 회원가입
 
